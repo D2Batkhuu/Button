@@ -1,3 +1,5 @@
+// Button.jsx
+
 import React from 'react';
 import './Button.css';
 
@@ -28,7 +30,6 @@ interface ButtonProps {
     variant: ButtonVariant;
     state: ButtonState;
     size: 'small' | 'medium' | 'large';
-    radius?: number; // Make the radius optional
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -37,22 +38,18 @@ const Button: React.FC<ButtonProps> = ({
     variant,
     color,
     state,
-    radius = 8, // Default radius value
 }: ButtonProps) => {
     const buttonClasses = [
         'button',
-        `button-${size}`,
+        `button-${size}`, // Apply the size class
         `button-${color}-${variant}-${state}`,
-        size === 'small' ? 'button-border-small' : '',
-        size === 'medium' ? 'button-border-medium' : '',
-        size === 'large' ? 'button-border-large' : '',
     ].join(' ');
 
-    const style: React.CSSProperties = {
-        borderRadius: radius + 'px',
-    };
-
-    return <button className={buttonClasses} style={style}>{label}</button>;
+    return (
+        <button className={buttonClasses}>
+            {label}
+        </button>
+    );
 };
 
 Button.defaultProps = {
